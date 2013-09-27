@@ -35,18 +35,18 @@ public class Person2 {
 	 */
 	private String calc(String input)
     {
-//        ArrayList<Character> list = new ArrayList<Character>();
-//        String output="";
-//
-//      for(int i = 0; i< input.length(); i++)
-//      {
-//        list.add(input.charAt(i));
-//      }
-//        Collections.shuffle(list);
-//      for(char c : list)
-//      {
-//        output+=c;
-//      }
+        ArrayList<Character> list = new ArrayList<Character>();
+        String output="";
+
+      for(int i = 0; i< input.length(); i++)
+      {
+        list.add(input.charAt(i));
+      }
+        Collections.shuffle(list);
+      for(char c : list)
+      {
+        output+=c;
+      }
 
 	  return output;
 	}
