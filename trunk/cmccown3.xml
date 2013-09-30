@@ -2,13 +2,14 @@
 	<property name="src-dir" value="src" />
 	<property name="lib-dir" value="lib" />
 	<property name="build-dir" value="build" />
+	<property name="javadoc-dir" value="apidoc" />
 
-	<target name="clean">
-		<delete dir="${build-dir}" />
+	<target name="prepare">
+		<mkdir dir="${build-dir}" />
+		<mkdir dir="${javadoc-dir}" />
 	</target>
 
 	<target name="compile">
-		<mkdir dir="${build-dir}" />
 		<javac srcdir="${src-dir}" destdir="${build-dir}" includeantruntime="false">
 			<classpath>
 				<fileset dir="${lib-dir}">
@@ -16,5 +17,14 @@
 				</fileset>
 			</classpath>
 		</javac> 
+	</target>
+
+	<target name="javadoc">
+		<javadoc sourcepath="${src-dir}" destdir="${javadoc-dir}" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${build-dir}" />
+		<delete dir="${javadoc-dir}" />
 	</target>
 </project>
