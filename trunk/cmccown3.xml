@@ -32,11 +32,11 @@
 	</target>
 	
 	<target name="jar">
-		<manifest file="${man-file}">
-			<attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain" />
-		</manifest>
-		<jar basedir="${src-dir}" destfile="${jar-file}" manifest="${man-file}"/>
-		<delete file="${man-file} />
+		<jar basedir="${src-dir}" destfile="${jar-file}">
+			<manifest>
+				<attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain" />
+			</manifest>
+		</jar>
 	</target>
 
 	<target name="run">
