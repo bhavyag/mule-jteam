@@ -45,7 +45,11 @@
 	</target>
 
 	<target name="all">
-		
+		<antcall target="prepare" />
+		<antcall target="compile" />
+		<antcall target="javadoc" />
+		<antcall target="jar" />
+		<antcall target="run" />
 	</target>
 
 	<target name="clean">
