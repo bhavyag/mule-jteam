@@ -20,7 +20,13 @@
 	</target>
 
 	<target name="javadoc">
-		<javadoc sourcepath="${src-dir}" destdir="${javadoc-dir}" />
+		<javadoc sourcepath="${src-dir}" destdir="${javadoc-dir}"> 
+			<classpath>
+				<fileset dir="${lib-dir}">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</javadoc>
 	</target>
 
 	<target name="clean">
