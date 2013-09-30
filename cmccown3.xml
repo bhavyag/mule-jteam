@@ -32,9 +32,10 @@
 	</target>
 	
 	<target name="jar">
-		<jar basedir="${src-dir}" destfile="${jar-file}">
+		<jar basedir="${build-dir}" destfile="${jar-file}">
 			<manifest>
 				<attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain" />
+				<attribute name="Class-Path" value="${lib-dir}/*"/>
 			</manifest>
 		</jar>
 	</target>
