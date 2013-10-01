@@ -21,6 +21,7 @@
 			<jar basedir="${build.dir}" destfile="${jar}" >
 					<manifest>
 						<attribute name="main.class" value="src.edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+                        <attribute name="Class-Path" value="${lib.dir}/resources.jar"/>
 					</manifest>
 			</jar>
 	</target>
