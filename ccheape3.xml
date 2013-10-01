@@ -8,13 +8,13 @@
 	<property name="jar" value="AntLabRun.jar"/>
 
 
-	<target name= "prepare" depends="prepare">
+	<target name= "prepare">
 		<mkdir dir="${build.dir}" />
         <mkdir dir="${apidoc.dir}" />
 	</target>
 
-	<target name="compile">
-		<javac srcdir="${src.dir}" destdir="${build.dir}" classpath="${lib.dir}"/>
+	<target name="compile" depends="prepare">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpath="lib/resources.jar"/>
 	</target>
 
 	<target name="jar" depends="compile">
