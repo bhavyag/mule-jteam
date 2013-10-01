@@ -3,8 +3,6 @@
 
 	<property name="src.dir" value="src"/>
 	<property name="build.dir" value="build"/>
-	<!--property name="classes.dir" value="${build.dir}/classes"/-->
-	<property name="jar.dir" value="${build.dir}/jar"/>
 	<property name="main-class" value="AntLabMain.java"/>
 	<property name="jar" value="AntLabRun.jar"/>
 	<property name="apidoc.dir" value="apidoc/"/>
@@ -12,9 +10,7 @@
 
 	<target name="prepare">
         <mkdir dir="${build.dir}" />
-        <!--mkdir dir="${src.dir}" /-->
         <mkdir dir="${apidoc.dir}" />
-        <!--mkdir dir="${lib.dir}" /-->
    	</target>
 
 	<target name="clean">
@@ -24,14 +20,14 @@
 	</target>
 
 	<target name="compile" depends="prepare">
-		<javac srcdir="${src.dir}" destdir="${build.dir}" classpath="${lib.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpath="lib/resources.jar"/>
 	</target>
 
 	<target name="jar" depends="compile">
-		<!--mkdir dir="${jar.dir}"/-->
-		<jar destfile="jar.dir" basedir="${build.dir}">
+		<jar destfile="${jar}" basedir="${build.dir}">
 			<manifest>
 				<attribute name="main-class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+				<attribute name="Class-Path" value="${lib.dir}/resources.jar"/>
 			</manifest>
 		</jar>
 	</target>
