@@ -1,17 +1,18 @@
 <project name="m4" basedir="." default="all">
-	<property name="src-dir" value="src" />
-	<property name="lib-dir" value="lib" />
-	<property name="build-dir" value="build" />
-	<property name="javadoc-dir" value="apidoc" />
-	<property name="jar-file" value="AntLabRun.jar" />
-	<property name="man-file" value="MANIFEST.MF" />
+	<target name="init">
+		<property name="src-dir" value="src" />
+		<property name="lib-dir" value="lib" />
+		<property name="build-dir" value="build" />
+		<property name="javadoc-dir" value="apidoc" />
+		<property name="jar-file" value="AntLabRun.jar" />
+	</target>
 
-	<target name="prepare">
+	<target name="prepare" depends="init">
 		<mkdir dir="${build-dir}" />
 		<mkdir dir="${javadoc-dir}" />
 	</target>
 
-	<target name="compile">
+	<target name="compile" depends="prepare">
 		<javac srcdir="${src-dir}" destdir="${build-dir}" includeantruntime="false">
 			<classpath>
 				<fileset dir="${lib-dir}">
@@ -21,7 +22,7 @@
 		</javac> 
 	</target>
 
-	<target name="javadoc">
+	<target name="javadoc" depends="prepare">
 		<javadoc sourcepath="${src-dir}" destdir="${javadoc-dir}"> 
 			<classpath>
 				<fileset dir="${lib-dir}">
@@ -31,7 +32,7 @@
 		</javadoc>
 	</target>
 	
-	<target name="jar">
+	<target name="jar" depends="compile">
 		<jar basedir="${build-dir}" destfile="${jar-file}">
 			<manifest>
 				<attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain" />
@@ -40,19 +41,13 @@
 		</jar>
 	</target>
 
-	<target name="run">
+	<target name="run" depends="jar">
 		<java fork="true" jar="${jar-file}" />
 	</target>
 
-	<target name="all">
-		<antcall target="prepare" />
-		<antcall target="compile" />
-		<antcall target="javadoc" />
-		<antcall target="jar" />
-		<antcall target="run" />
-	</target>
+	<target name="all" depends="javadoc, run" />
 
-	<target name="clean">
+	<target name="clean" depends="init">
 		<delete dir="${build-dir}" />
 		<delete dir="${javadoc-dir}" />
 		<delete file="${jar-file}" />
