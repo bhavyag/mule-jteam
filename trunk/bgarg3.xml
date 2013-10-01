@@ -1,0 +1,63 @@
+<!-- bgarg3.xml -->
+<project name="m4" basedir="." default="main">
+
+	<property name="src.dir" value="src"/>
+	<property name="build.dir" value="build"/>
+	<!--property name="classes.dir" value="${build.dir}/classes"/-->
+	<property name="jar.dir" value="${build.dir}/jar"/>
+	<property name="main-class" value="AntLabMain.java"/>
+	<property name="jar" value="AntLabRun.jar"/>
+	<property name="apidoc.dir" value="apidoc/"/>
+	<property name="lib.dir" value="lib/"/>
+
+	<target name="prepare">
+        <mkdir dir="${build.dir}" />
+        <!--mkdir dir="${src.dir}" /-->
+        <mkdir dir="${apidoc.dir}" />
+        <!--mkdir dir="${lib.dir}" /-->
+   	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+        <delete dir="${apidoc.dir}" />
+        <delete file="${jar}" />
+	</target>
+
+	<target name="compile" depends="prepare">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpath="${lib.dir}"/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<!--mkdir dir="${jar.dir}"/-->
+		<jar destfile="jar.dir" basedir="${build.dir}">
+			<manifest>
+				<attribute name="main-class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="javadoc">
+        <javadoc sourcepath="${src.dir}" destdir="${apidoc.dir}"> 
+    	 	<fileset dir="${src.dir}">
+                <include name="**/*.jar" />
+            </fileset>
+        </javadoc>
+    </target>
+
+    <target name="all">
+        <antcall target="prepare" />
+        <antcall target="compile" />
+        <antcall target="javadoc" />
+        <antcall target="jar" />
+        <antcall target="run" />
+    </target>
+
+	<target name="run" depends="jar">
+		<java jar="${jar}" fork="true"/>
+	</target>
+
+	<target name="clean-build" depends="clean,jar"/>
+
+	<target name="main" depends="clean,run"/>
+
+</project>
